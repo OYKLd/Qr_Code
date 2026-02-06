@@ -171,8 +171,22 @@ class QRCodeScanner {
         }
     }
 
+    isValidUrl(string) {
+        try {
+            const url = new URL(string);
+            return url.protocol === 'http:' || url.protocol === 'https:';
+        } catch (_) {
+            return false;
+        }
+    }
+
     showResult(data) {
-        this.resultText.textContent = data;
+        // Check if the data is a URL
+        if (this.isValidUrl(data)) {
+            this.resultText.innerHTML = `<a href="${data}" target="_blank" rel="noopener noreferrer">${data}</a>`;
+        } else {
+            this.resultText.textContent = data;
+        }
         this.resultSection.style.display = 'block';
         this.errorSection.style.display = 'none';
     }
