@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecteur QR Code</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Lecteur QR Code</h1>
+            <p>Scannez des QR codes avec votre caméra ou importez une image</p>
+        </header>
+
+        <main>
+            <div class="scanner-section">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="camera">Caméra</button>
+                    <button class="tab-btn" data-tab="file">Fichier</button>
+                </div>
+
+                <div class="tab-content">
+                    <div id="camera-tab" class="tab-panel active">
+                        <div class="camera-container">
+                            <video id="video" autoplay playsinline></video>
+                            <canvas id="canvas" style="display: none;"></canvas>
+                            <div class="scan-overlay">
+                                <div class="scan-frame"></div>
+                            </div>
+                        </div>
+                        <div class="camera-controls">
+                            <button id="start-camera" class="btn btn-primary">Démarrer la caméra</button>
+                            <button id="stop-camera" class="btn btn-secondary" style="display: none;">Arrêter</button>
+                        </div>
+                    </div>
+
+                    <div id="file-tab" class="tab-panel">
+                        <div class="file-upload">
+                            <div class="upload-area" id="upload-area">
+                                <p>Cliquez ou glissez une image ici</p>
+                                <input type="file" id="file-input" accept="image/*" style="display: none;">
+                            </div>
+                            <div id="preview-container" style="display: none;">
+                                <img id="preview-image" alt="Aperçu">
+                                <canvas id="file-canvas" style="display: none;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="result-section" class="result-section" style="display: none;">
+                <div class="result-card">
+                    <h3>QR Code détecté</h3>
+                    <div class="result-content">
+                        <p id="result-text"></p>
+                        <div class="result-actions">
+                            <button id="copy-btn" class="btn btn-primary">Copier</button>
+                            <button id="clear-btn" class="btn btn-secondary">Nouveau scan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="error-section" class="error-section" style="display: none;">
+                <div class="error-card">
+                    <h3>Erreur</h3>
+                    <p id="error-text"></p>
+                    <button id="retry-btn" class="btn btn-primary">Réessayer</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Scanner QR Code</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
